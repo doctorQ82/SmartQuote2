@@ -1,0 +1,8 @@
+version: '3.9'
+
+services:
+  smartquote:
+    image: ${DOCKER_REGISTRY-}smartquote
+    build:
+      context: .
+      dockerfile: Dockerfile

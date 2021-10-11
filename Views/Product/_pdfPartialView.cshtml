@@ -1,0 +1,36 @@
+﻿
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js" integrity="sha384-xTrDiJhqtvR3I1Bhj4g6amlBpDni3nR8F9/M6mUTJ0iHCrnX/yG50pzXBuGn6/6M" crossorigin="anonymous"></script>
+<script>
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+</script>
+
+<div class="modal-header">
+    <div class="text-right">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="text-center">
+        @(Html.Kendo().PDFViewer().Name("pdfviewer")
+    .PdfjsProcessing(pdf => pdf.File(Url.Content("~/lib/Files/Terms _ Conditions Smart motor.pdf")))
+    .Events(e => e.Render("onRender"))
+    )
+    </div>
+</div>
+
+    <script>
+        var firstRender = true;
+        function onRender(e) {
+            if (firstRender) {
+                e.sender.toolbar.zoom.combobox.value("fitToWidth");
+                e.sender.toolbar.zoom.combobox.trigger("change");
+                firstRender = false;
+            }
+        }
+    </script>
+
+    <style>
+        html body #pdfviewer {
+            width: 100% !important;
+        }
+    </style>

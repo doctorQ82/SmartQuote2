@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<emails>
+   <email id="1">
+    <Name>Reporter</Name>
+    <mail>Reporter@falconinsurance.co.th</mail>
+    <types>FROM</types>
+  </email>
+    <email id="2">
+    <Name>KitichaiB</Name>
+    <mail>KitichaiB@falconinsurance.co.th</mail>
+    <types>TO</types>
+  </email>
+    <email id="3">
+    <Name>AmorndechU</Name>
+    <mail>AmorndechU@falconinsurance.co.th</mail>
+    <types>CC</types>
+  </email>
+</emails>
+
+
+

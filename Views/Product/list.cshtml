@@ -1,0 +1,304 @@
+﻿@using Kendo.Mvc.UI
+@using SmartQuote.Models;
+@Html.AntiForgeryToken()
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<input type="hidden" id="RequestVerificationToken"
+       name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+<link href="~/css/site.css" rel="stylesheet" />
+
+<div class="row banner-content">
+    @*<img src="~/Image/banner.png" style="width: 100%; max-height:300px">*@
+    @*<img src="~/Image/falcon4life_banner.png" class="img-fluid">*@
+    <picture>
+        <source media="(max-width: 720px)" srcset="~/Image/falcon4life_mobile.png" class="img-fluid">
+        <source media="(min-width: 800px)" srcset="~/Image/falcon4life_banner.png" class="img-fluid">
+        <img src="~/Image/falcon4life_banner.png" class="img-fluid">
+    </picture>
+</div>
+
+<div class="cards-container">
+
+    @foreach (PlanModel plan in (PlanModel[])ViewBag.Plans)
+    {
+        <div class="k-card">
+            <div class="k-card-header  text-white text-center bg1" style="height:60px">
+                @*<h5 class="k-card-title f1">ประกันรถยนต์ชั้น 1</h5>*@
+                @*<img src="~/Image/cardheader.png" style="max-width:320px;">*@
+            </div>
+            <div class="k-card-body" style="background-color: #f2f2f2 ">
+                <div class="item text-center">
+                    @if (plan.RepairType == "ซ่อมศูนย์/อู่")
+                    {
+                        <img src="~/Image/dealer.png" style="max-width: 105px; max-height: 105px">
+                    }
+                    else if (plan.RepairType == "ซ่อมอู่ทั่วไป")
+                    {
+                        <img src="~/Image/garage.png" style="max-width: 105px; max-height: 105px ">
+                    }
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width:160px">
+                            <span class="f4">ชำระเบี้ยครั้งแรก</span>
+                        </div>
+                        <div class="col text-left f4" style="max-width:160px">
+                            <span>@plan.totalPremium1</span> บาท
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f4">ชำระเบี้ยรายเดือน</span>
+                        </div>
+                        <div class="col text-left f4" style="max-width: 160px">
+                            <span>@plan.totalPremium2</span> บาท/เดือน
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="w-50 col text-left" style="max-width: 160px">
+                            <span class="f2">
+                                ระยะทางเฉลี่ย
+                            </span>
+                        </div>
+                        <div class="col text-left f2" style="max-width: 160px">
+                            @plan.UseDistance กม./30วัน
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f2">เบี้ยประกัยตามระยะทาง</span>
+                        </div>
+                        <div class="col text-left f2" style="max-width: 160px">
+                            @plan.premium_Percent บาท/กม.
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="item">
+                    <div class="row">
+                        <div class="w-50 col text-left" style="max-width: 160px">
+                            <span class="f4">
+                                เบี้ยประกัยเฉลี่ยต่อปี
+                            </span>
+                        </div>
+                        <div class="col text-left f3" style="max-width: 160px">
+                            @plan.totalPremium3 บาท
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f2">
+                                ทุนประกันภัย
+                            </span>
+                        </div>
+                        <div class="col text-left f3 font-weight-bold" style="max-width: 160px; color: #f19368">
+                            @plan.SumInsured บาท
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 320px">
+                            <span class="f2">
+                                ความรับผิดชอบต่อบุคคลภายนอก
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f2">
+                                ชีวิต ร่างกาย หรืออนามัย
+                            </span>
+                        </div>
+                        <div class="col text-left f2 font-weight-bold" style="max-width: 160px; color: #f19368">
+                            @plan.TPBI_Person บาทต่อคน
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f2">
+                                ชีวิต ร่างกาย หรืออนามัย
+                            </span>
+                        </div>
+                        <div class="col text-left f2 font-weight-bold" style="max-width: 160px; color: #f19368">
+                            @plan.TPBI_Accident บาทต่อครั้ง
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-left" style="max-width: 160px">
+                            <span class="f2">
+                                เสียหายต่อทรัพย์สิน
+                            </span>
+                        </div>
+                        <div class="col text-left f2 font-weight-bold" style="max-width: 160px; color: #f19368">
+                            @plan.TPPD_Accident บาทต่อครั้ง
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+                <div class="item">
+                    <div class="row">
+                        <div class="col text-center" style="max-width: 320px">
+                            @*<img src="~/Image/coverage1.png" style="max-width: 170px;">*@
+
+                            <img src="~/Image/coverage1.png" style="max-width: 170px; "
+                            data-toggle="modal" data-target="#showpdfmodal" data-id="@plan.RunNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="k-card-actions k-card-actions-stretched">
+                <span class="k-card-action" style="max-width:160px">
+                    <a href="@Url.Action("QuotationCreate", "Product", new {Id = @plan.RunNo})">
+                        <img src="~/Image/Buy.png" style="max-width: 158px; max-height: 100%">
+                    </a>
+                </span>
+                <span class="k-card-action" style="max-width:160px">
+                    <img src="~/Image/Contact.png" style="max-width: 158px ;max-height:100%"
+                         data-toggle="modal" data-target="#showmodal" data-id="@plan.RunNo">
+                </span>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+
+<div id="showmodal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="max-width:350px">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_showParticalView");
+            }
+        </div>
+    </div>
+</div>
+
+
+<div id="showpdfmodal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="max-width:auto; max-height:auto">
+        <div class="modal-content">
+            @{
+                Html.RenderPartial("_pdfPartialView");
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+
+    .k-card {
+        width: 320px;
+        margin: 2%;
+    }
+
+    .k-Tooltip {
+        font-size: 10pt
+    }
+
+    .k-card-footer {
+        text-align: center;
+        height: 120px
+    }
+
+    .modal {
+        padding: 0 !important;
+    }
+
+    /*.modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;*/
+ /*       vertical-align: middle;*/
+        /*margin-right: -4px;*/ /* Adjusts for spacing */
+    /*}*/
+
+    .modal-dialog {
+        width: 100%;
+        max-width: none;
+        height: 100%;
+        margin: 0;
+    }
+
+
+    .modal-content {
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+    }
+
+  /*  .modal-body {
+        overflow-y: auto;
+    }*/
+
+/*    .modal-dialog {
+        margin: 0;
+        top: 0;
+        left: 0;
+        position: relative;
+        display: table;
+        width: 100% !important;
+        height: 100% !important;
+    }*/
+</style>
+
+
+<script type="text/javascript">
+    $('#showmodal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var rnNo = button.data('id');
+        location.href = '@Url.Action("Search", "Product")?rnNo=' + rnNo ;
+    });
+
+    function forgeryToken() {
+        return kendo.antiForgeryTokens();
+    }
+</script>

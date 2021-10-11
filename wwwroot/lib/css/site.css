@@ -1,0 +1,174 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+@charset "UTF-8";
+
+
+@font-face {
+    font-family: 'fontawesome';
+    src: url('../fontawesome/webfonts/fa-brands-400.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'fontawesome';
+    src: url('../fontawesome/webfonts/fa-regular-400.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'fontawesome';
+    src: url('../fontawesome/webfonts/fa-solid-900.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'DB-Ozone-X';
+    font-style: normal;
+    font-weight: 400;
+    src: local('DB Ozone X'), local('DB-Ozone-X'), url("../fonts/DB Ozone X v3.2.1.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'DB-Ozone-X';
+    font-style: normal;
+    font-weight: 500;
+    src: local('DB Ozone X Medium'), local('DB-Ozone-X-Medium'), url("../fonts/DB Ozone X Med v3.2.1.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'DB-Ozone-X';
+    font-style: normal;
+    font-weight: 700;
+    src: local('DB Ozone X Bold'), local('DB-Ozone-X-Bold'), url("../fonts/DB Ozone X Bd v3.2.1.ttf") format('truetype');
+}
+
+
+body, html {
+    font-family: DB-Ozone-X;
+    font-size: 16px;
+}
+
+.f1 {
+    font-family: DB-Ozone-X;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+
+.f2 {
+    font-family: DB-Ozone-X;
+    font-size: 13pt
+}
+
+.f3 {
+    font-family: DB-Ozone-X;
+    font-size: 16pt;
+    font-weight: bold
+}
+
+.f4 {
+    font-family: DB-Ozone-X;
+    font-size: 14pt;
+    font-weight: bold
+}
+
+.f5 {
+    font-family: DB-Ozone-X;
+    font-size: 14pt;
+}
+
+.f6 {
+    font-family: DB-Ozone-X;
+    font-size: 12pt;
+}
+
+.bg1 {
+/*     background-color: #244170 ;*/
+    background-image: url('../Image/cardheader.png');
+    background-repeat: no-repeat;
+    background-size: 320px 56px;
+}
+.p {
+    color: #244170
+}
+
+.p1 {
+    color: #4398ee
+}
+
+.p2 {
+    color: #f19368;
+    font-weight: bold
+}
+
+.footer {
+    clear: both;
+    font-family: DB-Ozone-X;
+    font-size: 16pt;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    /*line-height: 60px;*/ /* Vertically center the text there */
+}
+
+/*a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}*/
+
+
+.navbar-nav li a {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    line-height: 40px;
+}
+
+
+.navbar-brand {
+    font-size: 22px;
+    padding-left: 15px;
+    padding-top: 0px;
+}
+
+@media screen and (min-width: 768px) {
+    .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+    a:hover {
+        color: white;
+        background-color: orange;
+        text-decoration: none;
+    }
+
+     selected link 
+    a:active {
+        color: green;
+        text-decoration: underline;
+    }
+
+    .navbar.navbar-default {
+        margin-top: 29px;
+
+        margin-bottom: 0px;
+        background-color: #99ccff;
+    }
+
+    .navbar-nav li a {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
+        line-height: 40px;
+    }
+
+    .navbar-brand {
+        font-size: 22px;
+        padding-left: 15px;
+        padding-top: 0px;
+    }

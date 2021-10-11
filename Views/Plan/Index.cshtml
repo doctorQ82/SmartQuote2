@@ -1,0 +1,421 @@
+﻿@using Kendo.Mvc.UI
+@Html.AntiForgeryToken()
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+}
+
+<input type="hidden" id="RequestVerificationToken"
+       name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+@Html.AntiForgeryToken()
+
+<input type="hidden" id="RequestVerificationToken"
+       name="RequestVerificationToken" value="@GetAntiXsrfRequestToken()">
+
+<div class="row" style="margin-top:0px; padding-left:0px">
+    <picture>
+        <source media="(max-width: 720px)" srcset="~/Image/falcon4life_mobile.png" class="img-fluid">
+        <source media="(min-width: 800px)" srcset="~/Image/falcon4life_banner.png" class="img-fluid">
+        <img src="~/Image/falcon4life_banner.png" class="img-fluid">
+    </picture>
+</div>
+    <br />
+    <br />
+    <div class="row" style="background-color: #092c4a">
+        <div class="col">
+        </div>
+        <div class="col text-center ">
+            <input type="image" src="~/Image/Inquiry.png"  style="max-width:220px;">
+        </div>
+        <div class="col">
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <form id="ticketsForm" kendo-validator="true" method="post" action='@Url.Action("Inquiry")'>
+        <div class="row">
+
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+
+            <div class="col-sm-8 col-md-2 col-lg-2">
+                <div class="form-group">
+                    @(Html.Kendo().DropDownList()
+            .Name("Title")
+            .OptionLabel("คำนำหน้า...")
+            .OptionLabelTemplate("<span style='color:gray'>คำนำหน้า...</span>")
+            .DataTextField("TitleDesc")
+            .DataValueField("TitleCode")
+            .Height(250)
+            //.Filter(FilterType.Contains)
+            .HtmlAttributes(new
+            {
+                style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                placeholder = "คำนำหน้า*",
+                required = "required",
+                validationmessage = "กรุณาระบุคำนำหน้า"
+            })
+        .DataSource(source => {
+            source.Read(read =>
+            {
+                read.Action("Read_Title", "Plan");
+            })
+            .ServerFiltering(false);
+        })
+        )
+                </div>
+            </div>
+
+            <div class="col-sm-8 col-md-3 col-lg-3">
+                <div class="form-group">
+                    @(Html.Kendo()
+                    .TextBox()
+                    .Name("firstName")
+                      .HtmlAttributes(new
+                      {
+                          style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                          placeholder = "ชื่อ*",
+                          required = "required",
+                          validationmessage = "กรุณาระบุชื่อ"
+                      })
+                    )
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-3 col-lg-3">
+                <div class="form-group">
+                    @(Html.Kendo()
+                    .TextBox()
+                    .Name("lastname")
+                    .HtmlAttributes(new { style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                        placeholder = "นามสกุล*",
+                        required = "required",
+                        validationmessage = "กรุณาระบุนามสกุล"
+                    })
+                    )
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().MaskedTextBox()
+                                    .Name("phone_number")
+                                    .Mask("000-000-0000")
+                             .HtmlAttributes(new
+                             {
+                                 style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                                 placeholder = "เบอร์โทรศัพท์*", required =  "required", validationmessage = "กรุณาระบุเบอร์โทรศัพท์"  })
+                                    )
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo()
+                                .TextBox()
+                                .Name("email")
+                                 .HtmlAttributes(new
+                                 {
+                                     style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;",
+                                     placeholder = "อีเมล*",
+                                     required = "required", type = "email",
+                                     validationmessage = "กรุณาระบุอีเมล" })
+                                )
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().DropDownList()
+        .Name("Brands")
+        .OptionLabel("เลือกยี่ห้อ")
+        .OptionLabelTemplate("<span style='color:gray'>เลือกยี่ห้อ</span>")
+        .DataTextField("Make")
+        .DataValueField("Make")
+        .Height(250)
+         .HtmlAttributes(new
+         {
+             style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+             placeholder = "ยี่ห้อรถ*",
+             required = "required",
+             validationmessage = "กรุณาระบุยี่ห้อรถ"
+         })
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("Read_Brand", "Plan");
+            });
+        })
+        //.Events(e => e.Change("onChange"))
+        )
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().DropDownList()
+        .Name("Models")
+        .OptionLabel("เลือกรุ่นรถ")
+        .OptionLabelTemplate("<span style='color:gray'>เลือกรุ่นรถ</span>")
+        .DataTextField("ModelDesc")
+        .DataValueField("ModelCode")
+        .Height(250)
+      .HtmlAttributes(new
+      {
+          style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+          placeholder = "รุ่นรถ*",
+          required = "required",
+          validationmessage = "กรุณาระบุรุ่นรถ"
+      })
+
+        .DataSource(source =>
+        {
+            source.Read(read =>
+            {
+                read.Action("Read_Model", "Plan")
+                    .Data("filterBrands");
+            })
+            .ServerFiltering(true);
+        })
+        .Enable(false)
+        .AutoBind(false)
+        .CascadeFrom("Brands")
+        )
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().DropDownList()
+                                    .Name("SubModels")
+                                    .OptionLabel("เลือกรุ่นรถย่อย")
+                                    .OptionLabelTemplate("<span style='color:gray'>เลือกรุ่นรถย่อย</span>")
+                                    .DataTextField("SubModelDesc")
+                                    .DataValueField("SubModel")
+                                    .Height(250)
+                              .HtmlAttributes(new
+                              {
+                                  style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                                  placeholder = "รุ่นรถ*",
+                                  required = "required",
+                                  validationmessage = "กรุณาระบุรุ่นรถย่อย"
+                              })
+                                     .DataSource(source =>
+                                     {
+                                         source.Read(read =>
+                                         {
+                                             read.Action("Read_SubModel", "Plan")
+                                                 .Data("filterModels");
+                                         })
+                                         .ServerFiltering(true);
+                                     })
+                                    .Enable(false)
+                                    .AutoBind(false)
+                                    .CascadeFrom("Models")
+                                  )
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().DropDownList()
+                                    .Name("CarYear")
+                                    .OptionLabel("เลือกปีที่จดทะเบียน")
+                                    .OptionLabelTemplate("<span style='color:gray'>เลือกปีที่จดทะเบียน</span>")
+                                    .DataTextField("CarYearRegis")
+                                    .DataValueField("CarYearRegis")
+                                    .Height(200)
+                            .HtmlAttributes(new
+                            {
+                                style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                                placeholder = "ปีจดทะเบียน*",
+                                required = "required",
+                                validationmessage = "กรุณาระบุปีจดทะเบียน"
+                            })
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("Read_CarRegisYear", "Plan");
+                                        });
+                                    })
+                                    )
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().DatePicker()
+                                .Name("PolicyExpire")
+                                .Format("dd/MM/yyyy")
+                                .HtmlAttributes(new
+                                {
+                                    style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                                    placeholder = "วันที่หมดอายุกรมธรรม์*",title = "วันที่หมดอายุกรมธรรม์",   required = "required", validationmessage = "กรุณาระบุนวันที่หมดอายุกรมธรรม์"  })
+                                )
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <div class="form-group">
+                    @(Html.Kendo().NumericTextBox<int>()
+                                    .Name("UseCarKM")
+                                    .Format("n0")
+                                    .Min(1)
+                                    .Step(10)
+                                    .Placeholder("ระยะทางที่ใช้เฉลี่ยต่อเดือน* (กม.)")
+                                  .HtmlAttributes(new
+                                  {
+                                      style = "width: 100%;font-family: DB-Ozone-X; font-size:14pt;color:#000000",
+                                      title = "numeric" ,
+                                      required = "required",
+                                      validationmessage = "กรุณาระบุนระยะทางทีี่ใช้เฉลี่ยต่อเดือน"
+                                  })
+                                    )
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-2">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-3 hinden-xs">
+            </div>
+            <div class="col-sm-12 col-md-6 col-6">
+                <div class="text-white text-left">
+                    @*@(Html.Kendo().CheckBox()
+                        .Name("fciCustomer")
+                        .Label("ปัจจุบันเป็นลูกค้าฟอลคอนหรือไม่")
+                        .HtmlAttributes(new
+                        {
+                            style = "font-family: DB-Ozone-X; font-size:15pt;color:#000000"
+                        })
+                    )*@
+
+                    <input type="checkbox" name="fciCustomer" />
+                    <span class="text-white" style="font-family: DB-Ozone-X; font-size:14pt;color:#000000">
+                        ปัจจุบันเป็นลูกค้าฟอลคอนหรือไม่
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-3 hinden-xs">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 col-3 hinden-xs">
+            </div>
+            <div class="col-sm-12 col-md-6 col-6">
+                <div class="text-white text-left">
+                    @*@(Html.Kendo().CheckBox()
+                        .Name("fciConsent")
+                        .Label("ข้าพเจ้ายินยอมให้บริษัทฯ เก็บรวบรวม ใช้ข้อมูลส่วนบุคคลที่ให้ไว้ ข้างต้น สำหรับแจ้งข้อมูลข่าวสาร แนะนำผลิตภัณฑ์และบริการ กิจกรรมส่งเสริมการขาย รวมถึงข้อมูลทางการตลาด ตลอดจนข้อมูลอื่นๆ ที่เกี่ยวกับบริษัทฯ")
+                        .HtmlAttributes(new
+                        {
+                            style = "font-family: DB-Ozone-X; font-size:15pt;color:#000000",
+                            required = "required",
+                            validationmessage = "กรุณาเลือกความยินยอม"
+                        })
+                    )*@
+
+                    <input type="checkbox" name="fciConsent" required validationMessage="กรุณาเลือกความยินยอม" />
+                    <span  class="text-white" style = "font-family: DB-Ozone-X; font-size:14pt;color:#000000">
+                        ข้าพเจ้ายินยอมให้บริษัทฯ เก็บรวบรวม ใช้ข้อมูลส่วนบุคคลที่ให้ไว้ ข้างต้น สำหรับแจ้งข้อมูลข่าวสาร แนะนำผลิตภัณฑ์และบริการ กิจกรรมส่งเสริมการขาย รวมถึงข้อมูลทางการตลาด ตลอดจนข้อมูลอื่นๆ ที่เกี่ยวกับบริษัทฯ
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-3 hinden-xs">
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-12 text-center">
+
+                <a href="#" type="="></a>
+                <input type="image" src="~/Image/Calculate.png" alt="Submit" style="max-width:200px;">
+            </div>
+        </div>
+    </form>
+
+<script>
+
+    function filterBrands() {
+        return {
+            Brands: $("#Brands").val()
+        };
+    }
+
+    function filterModels() {
+        return {
+            Models: $("#Models").val()
+        };
+    }
+
+
+    function filterSubModel() {
+        return {
+            SubModels: $("#SubModels").val()
+        };
+    }
+
+    function forgeryToken() {
+        return kendo.antiForgeryTokens();
+    }
+
+</script>
+
+<style>
+    .k-readonly {
+        color: black;
+    }
+
+    body {
+        background-color: #092c4a;
+    }
+
+    text-responsive {
+        font-size: calc(100% + 1vw + 1vh);
+    }
+
+
+    .k-input.k-placeholder,
+    .k-input:-ms-input-placeholder {
+        color: inherit;
+        opacity: .7;
+    }
+
+    .k-input.k-placeholder,
+    .k-input::placeholder {
+        color: inherit;
+        opacity: .7;
+    }
+
+
+</style>
+

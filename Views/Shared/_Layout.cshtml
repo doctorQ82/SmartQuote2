@@ -1,0 +1,104 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#f2f2f2">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Quote</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha512-iQQV+nXtBlmS3XiDrtmL+9/Z+ibux+YuowJjI4rcpO7NYgTzfTOiFNm09kWtfZzEB9fQ6TwOVc8lFVWooFuD/w==" crossorigin="anonymous"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
+    </environment>
+
+    @*<link href="~/css/fciStyle.css" rel="stylesheet" />
+        <link href="~/css/site.css" rel="stylesheet" />*@
+
+    <link href="~/lib/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.2.616/styles/kendo.common-bootstrap.min.css" integrity="sha384-vgOR7lnwDaV+ECBOsxtp2LBmf8FXiEn0hCjYWFiT+CQk7CfFomkw0xMC5vZ1OslU" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.2.616/styles/kendo.bootstrap.min.css" integrity="sha384-1W9Xefk+B3E/ofuoLNRteVC26oyiFXIFKsPm/hPXQo/IDCwuw2usMZnQCZDd7+/r" crossorigin="anonymous">
+
+    <link href="~/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+
+
+    @*<script src="https://kendo.cdn.telerik.com/2021.2.616/js/jquery.min.js" integrity="sha384-5ypc8U4hUwE4mZsu3JMIdSJDqo0FATaz9NlQFIG6qcMZUrZOh4v+Y8PF4Fcszo2x" crossorigin="anonymous"></script>
+
+        <script src="https://kendo.cdn.telerik.com/2021.2.616/js/jszip.min.js" integrity="sha384-/uIBVG1oH4Tb9OcLLxfroAlKUcnoOIEjpv8jPC8YM4QzWRTuc9/VSQdrs+iFkWN1" crossorigin="anonymous"></script>
+
+        <script src="https://kendo.cdn.telerik.com/2021.2.616/js/kendo.all.min.js" integrity="sha384-bmVguhMYtJWTmC0EelgQm22PXdwNLP5DigGwPXSRGQOQJEV3Xi37dTnG7dsal65b" crossorigin="anonymous"></script>
+
+        <script src="https://kendo.cdn.telerik.com/2021.2.616/js/kendo.aspnetmvc.min.js" integrity="sha384-C9PnYk2vbJWeN7+1fxRHpb+w9SD2o5LgV0/wwlcizzPc4GMbGs2Px8ZDAS+bf3ov" crossorigin="anonymous"></script>*@
+
+
+    <script src="https://kendo.cdn.telerik.com/2021.3.914/js/jquery.min.js" integrity="sha384-5ypc8U4hUwE4mZsu3JMIdSJDqo0FATaz9NlQFIG6qcMZUrZOh4v+Y8PF4Fcszo2x" crossorigin="anonymous"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2021.3.914/js/jszip.min.js" integrity="sha384-/uIBVG1oH4Tb9OcLLxfroAlKUcnoOIEjpv8jPC8YM4QzWRTuc9/VSQdrs+iFkWN1" crossorigin="anonymous"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2021.3.914/js/kendo.all.min.js" integrity="sha384-QODCqzK8LK2ivZOYR3fq4wWpiGa9WZ2C8+ea8NZKi5Fh8wWhI1vkpoO8C5/JTDG9" crossorigin="anonymous"></script>
+
+    <script src="https://kendo.cdn.telerik.com/2021.3.914/js/kendo.aspnetmvc.min.js" integrity="sha384-KeiWzd0dHDatIJUOdEbs8ZAS7prGEdQ6pIMD+9qqDPeR+57Ld36znCGFMuPsOEsr" crossorigin="anonymous"></script>
+
+    <link href="~/lib/css/fciStyle.css" rel="stylesheet" />
+    <style>
+        img.logo {
+            width: 100%;
+            height: auto;
+            /* Recommended - Limit maximum width */
+            max-width: 220px;
+        }
+    </style>
+</head>
+<body>
+    @*@RenderBody()*@
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom mb-3">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" href="http://www.falconinsurance.co.th/">
+                    <picture>
+                        <source media="(max-width: 720px)" srcset="~/Image/logo2.png" class="img-fluid">
+                        <source media="(min-width: 800px)" srcset="~/Image/logo2.png" class="img-fluid">
+                        <img src="~/Image/logo2.png" class="img-fluid">
+                    </picture>
+
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse ">
+                    <ul class="nav navbar-nav navbar-right">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid" >
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted">
+        <div class="container-fluid">
+            &copy; 2021-Falcon Insurance Public Co., Ltd.
+        </div>
+    </footer>*@
+
+    <environment names="Development">
+        <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha512-n6dYFOG599s4/mGlA6E+YLgtg9uPTOMDUb0IprSMDYVLr0ctiRryPEQ8gpM4DCMlx7M2G3CK+ZcaoOoJolzdCg==" crossorigin="anonymous"
+                  asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
+    </environment>
+</body>
+</html>
